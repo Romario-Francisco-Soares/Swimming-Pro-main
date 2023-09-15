@@ -1,0 +1,88 @@
+
+* {
+    font-family: 'Inter', sans-serif;
+  }
+  .CorpoPrincipal{
+    background-image: url("/src/assets/Adornos.svg");
+    background-size: 40vw;
+    background-repeat: no-repeat;
+    background-attachment: fixed;
+    background-position: 5vw 12vw;
+  
+  }
+  .PadrãoVerdeAgua{
+    background-color: rgba(99, 235, 219, 100);
+  }
+  .PadrãoRosa{
+    background-color: rgba(235, 99, 197, 100);
+  }
+  .PadrãoAmarelo{
+    background-color: rgba(238, 241, 62, 100);
+  }
+  .PadrãoRoxo{
+    background-color: rgba(205, 76, 226, 100);
+  }
+  .PadrãoBranco{
+    background-color: rgba(245, 248, 255, 100);
+  }
+  .PadrãoVermelhoAlerta{
+    background-color: rgba(255, 214, 214, 100);
+  }
+  .PadrãoVerdeAlerta{
+    background-color: rgba(218, 246, 221, 100);
+  }
+  .PadrãoTomClaro{
+    background-color: rgba(165, 174, 183, 0.50);
+  }
+  .PadrãoLetraTomEscuro{
+    color: rgba(47, 77, 112, 100);
+  }
+  .PadrãoLetraTomMédio{
+    color: rgba(102, 110, 121, 100);
+  }
+  .PadrãoLetraTomClaro{
+    color: rgba(165, 174, 183, 100);
+  }
+  .PadrãoLetraBranco{
+    color: rgba(245, 248, 255, 100);
+  }
+  .Fonte10{
+    font-size: 10px;
+  }
+  .Fonte12{
+    font-size: 12px;
+  }
+  .Fonte16{
+    font-size: 16px;
+  }
+  .Fonte34{
+    font-size: 34px;
+  }
+  .CirculoOpções{
+    display: flex;
+    flex-direction: center;
+    justify-content: center;
+    width: 7vw;
+    height: 7vw;
+    border-radius: 50%;
+  }
+  .BoxOpções{
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: center;
+    align-content: center;
+    padding:2% 1.5%;
+    width: 11vw;
+    height: 13vw;
+    border-radius: 10%;
+    box-shadow: rgba(100, 100, 111, 0.2) 0px 7px 29px 0px;
+  }
+  .Titulo{
+    display: flex;
+    margin: 1vw;
+    padding: 1vw;
+    align-items: center;
+    justify-content: center;
+    font-size: 3vw;
+  }

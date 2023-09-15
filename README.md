@@ -1,2 +1,29 @@
-# Swimming-Pro-main
-Desenvolvimento TCC
+# swimming
+
+## Project setup
+```
+npm install
+```
+
+### Compiles and hot-reloads for development
+```
+npm run serve
+```
+## Acesso
+```
+Usuário Administração: Admin     Senha: Admin!
+Usuário Professor: Prof     Senha: Prof!
+```
+...
+### Compiles and minifies for production
+```
+npm run build
+```
+
+### Lints and fixes files
+```
+npm run lint
+```
+
+### Customize configuration
+See [Configuration Reference](https://cli.vuejs.org/config/).
