@@ -51,7 +51,7 @@ export default {
       //this.ListaPessoas.push(this.DadoAdicionar)
       //this.$emit('adicionarDado', this.DadoAdicionar)
       this.FecharModal()
-      this.LimparModal()
+      //this.LimparModal()
     },
     EditarPessoa(parametro){
       this.EmEdição = true

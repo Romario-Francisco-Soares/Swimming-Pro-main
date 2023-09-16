@@ -1,6 +1,13 @@
 <template>
+
+  <!--Git Status
+      git add .
+      git commit -m 'PrimeiroEnvio'
+      git push origin main
+  -->
+  
   <div class="CorpoPrincipal">
-    <MenuOpcoes v-if="TipoAcesso==null"
+    <MenuOpcoes v-if="TipoAcesso==null && Login"
                 @AcessarParceiros="acessarParceiros()"
                 @AcessarTurmas="acessarTurmas()"
                 @AcessarAlunos="acessarAlunos()"
@@ -13,7 +20,7 @@
     />
 
     <LayoutAcessos
-                  v-if="TipoAcesso!=null"
+                  v-if="TipoAcesso!=null && Login"
                   @AcessarMenuOpções="acessarMenuOpções()"
                   @adicionarDado="AdicionaDado($event)"
                   @ajustarDado="AjusdarTado($event)"
@@ -21,7 +28,9 @@
                   :ListaPessoas="Pessoas"
                   :TipoAcesso="TipoAcesso"
     />
-    <Acesso/>
+    <Acesso v-if="Login==false"
+            @acessar="ValidarAcesso($event)"
+    />
   </div>
 </template>
 

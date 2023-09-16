@@ -11,14 +11,18 @@ components: {
 },
 data(){
   return{
+    Acessante:null,
+    Login: false,
+
     TipoAcesso: null,
     Parceiros: "Parceiros",
     Turmas: "Turmas",
     Alunos: "Alunos",
     Financeiro: "Financeiro",
+    TpLogin: '',
     Titulo:'',
+
     Pessoas:null,
-    teste:null,
     DBPessoas: [{
         id: 0,
         TipoPessoa:1,
@@ -39,35 +43,9 @@ data(){
         HoraAula: 20,
         Turmas: 1,
         ProporcaoSalarial:20,
-
-        Turma: 1,
-        Pae: 'Adeilt',
-        Mãe: 'nazara',
-
-        valorMensalidade: 100.00,
-
-        status: 'Ativo'
-    },
-    {
-        id: 1,
-        TipoPessoa:1,
-        nome: "Jean",
-        idade: 41,
-        cpf: '00000000000',
-        Cref: '000000000',
-        Whatsapp: '31987408888',
-        telAlternativo: '31987408888',
-        Nascimento: '13/08/1994',
-        Rua: 'rouxinin',
-        NRua: '221',
-        Bairro: 'Cariru',
-        Cidade: 'Ipacity',
-        Cep: '31163522',
-        sexo: 'Femea',
-
-        HoraAula: 20,
-        Turmas: 1,
-        ProporcaoSalarial:20,
+        IdLogin: 'Admin',
+        SenhaLogin: 'Admin!',
+        TipoLogin:'Admin',
 
         Turma: 1,
         Pae: 'Adeilt',
@@ -79,7 +57,7 @@ data(){
     },
     {
         id: 2,
-        TipoPessoa:3,
+        TipoPessoa:1,
         nome: "Luana",
         idade: 41,
         cpf: '00000000000',
@@ -97,6 +75,41 @@ data(){
         HoraAula: 20,
         Turmas: 1,
         ProporcaoSalarial:20,
+        IdLogin: 'Prof',
+        SenhaLogin: 'Prof!',
+        TipoLogin:'Prof',
+
+        Turma: 1,
+        Pae: 'Adeilt',
+        Mãe: 'nazara',
+
+        valorMensalidade: 100.00,
+
+        status: 'Ativo'
+    },
+    {
+        id: 1,
+        TipoPessoa:3,
+        nome: "Jean",
+        idade: 41,
+        cpf: '00000000000',
+        Cref: '000000000',
+        Whatsapp: '31987408888',
+        telAlternativo: '31987408888',
+        Nascimento: '13/08/1994',
+        Rua: 'rouxinin',
+        NRua: '221',
+        Bairro: 'Cariru',
+        Cidade: 'Ipacity',
+        Cep: '31163522',
+        sexo: 'Femea',
+
+        HoraAula: 20,
+        Turmas: 1,
+        ProporcaoSalarial:20,
+        IdLogin: '',
+        SenhaLogin: '',
+        TipoLogin:'',
 
         Turma: 1,
         Pae: 'Adeilt',
@@ -126,6 +139,9 @@ data(){
         HoraAula: 20,
         Turmas: 1,
         ProporcaoSalarial:20,
+        IdLogin: '',
+        SenhaLogin: '',
+        TipoLogin:'',
 
         Turma: 1,
         Pae: 'Adeilt',
@@ -138,6 +154,14 @@ data(){
   }
 },
 methods:{
+    ValidarAcesso(parametro){  
+      
+      this.Acessante= this.DBPessoas.find((Pessoa) => (Pessoa.IdLogin == parametro.IdLogin))
+       if (this.Acessante.SenhaLogin == parametro.SenhaLogin) {
+          this.Login = true
+          this.TpLogin = this.Acessante.TipoLogin
+      }
+    },
     AjusdarTado(){
       
     },

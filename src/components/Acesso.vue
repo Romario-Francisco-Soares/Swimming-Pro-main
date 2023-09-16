@@ -2,8 +2,8 @@
   <div class="login">
 	<h1 class="PadrãoLetraTomEscuro">Login</h1>
     <div>
-      <input type="text" name="u" placeholder="Username" required="required" />
-      <input type="password" name="p" placeholder="Password" required="required" />
+      <input type="text" v-model="DadosAcesso.IdLogin" name="u" placeholder="Username" required="required" />
+      <input type="password" v-model="DadosAcesso.SenhaLogin" name="p" placeholder="Password" required="required" />
       <button class="btn btn-primary btn-block btn-large" @click="ValidarLogin()">Entrar</button>
     </div>
   </div>
@@ -14,7 +14,14 @@ export default {
   name: 'MenuOpcoes',
   data(){
     return{
-      Login:null
+      DadosAcesso:[
+      {IdLogin:null},
+      {SenhaLogin: null}]
+    }
+  },
+  methods:{
+    ValidarLogin(){
+      this.$emit('acessar', this.DadosAcesso)
     }
   }
 }
