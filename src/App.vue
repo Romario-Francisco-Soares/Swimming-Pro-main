@@ -23,13 +23,15 @@
                   v-if="TipoAcesso!=null && Login"
                   @AcessarMenuOpções="acessarMenuOpções()"
                   @adicionarDado="AdicionaDado($event)"
-                  @ajustarDado="AjusdarTado($event)"
+                  @ajustarDado="AjustarDado($event)"
                   :Titulo="Titulo"
                   :ListaPessoas="Pessoas"
                   :TipoAcesso="TipoAcesso"
+                  :DBEvolução="DBEvolução"
     />
     <Acesso v-if="Login==false"
             @acessar="ValidarAcesso($event)"
+            @adicionarEvolução="adicionarEvolução($event)"
     />
   </div>
 </template>

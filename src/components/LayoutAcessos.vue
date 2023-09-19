@@ -85,8 +85,14 @@
     </div>
 
     <footer>
+    <div class="botõesOpções PadrãoBranco" @click="ExibirModalEvolução(this.dadoCarregado.NrSeqEvolução)" v-if="TipoAcesso==3" >
+      <div class="PadrãoRosa CirculoOpções2 ">
+        <img class="PadrãoRosa EditarNovoEtc" src="..\assets\CadastrarParceiro.svg" alt="">
+      </div>
+      <h2 class="PadrãoLetraTomMédio Fonte16">Evoluir</h2>
+    </div>
 
-    <div class="botõesOpções PadrãoBranco"  @click="EditarPessoa(this.dadoCarregado)">
+    <div class="botõesOpções PadrãoBranco"  @click="EditarPessoa(this.dadoCarregado), this.ExibirModal()">
       <div class="PadrãoRosa CirculoOpções2">
         <img class="PadrãoRosa EditarNovoEtc" src="..\assets\edit.svg" alt="">
       </div>
@@ -100,11 +106,12 @@
       <h2 class="PadrãoLetraTomMédio Fonte16">Novo</h2>
     </div>
     </footer>
+
     <div class="BackModal" v-if="modalAtivo">
       <div class="ModalEditarNovo PadrãoBranco">
 
         <div class="TituloModal">
-          <h2 class="PadrãoLetraTomEscuro Fonte34">Parceiro</h2>
+          <h2 class="PadrãoLetraTomEscuro Fonte34">{{ Titulo }}</h2>
           <div class="LinhaAbaixoTitulo PadrãoTomClaro"></div>
         </div>
 
@@ -115,11 +122,11 @@
           </div>
           <div class="dado">
             <p class="PadrãoLetraTomClaro">CPF</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.CPF">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.cpf">
           </div>
           <div class="dado">
             <p class="PadrãoLetraTomClaro">RG</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.RG">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.rg">
           </div>
           <div class="dado">
             <p class="PadrãoLetraTomClaro">Whatsapp</p>
@@ -138,8 +145,8 @@
             <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.Cep">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">CPF</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.CPF">
+            <p class="PadrãoLetraTomClaro">Nascimento</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="DadoAdicionar.DtNascimento">
           </div>
           <div class="dado">
             <p class="PadrãoLetraTomClaro">Número Casa</p>
@@ -171,9 +178,76 @@
           </div>
           </div>
         <div class="BotõesSalvarCancelar">
-          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" v-if="EmEdição==false" @click="AdicionarDado()">Salvar</button>
-          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" v-if="EmEdição" @click="AjustarDado()">Editar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" v-if="EmEdição==false" @click="AdicionarDado(this.DadoAdicionar)">Salvar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" v-if="EmEdição==true" @click="AjustarDado()">Editar</button>
           <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModal()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+
+    
+    <div  v-if="modalAtivoEvolução" class="BackModal">
+      <div v-for="(Evolução) in EvoluçãoAdicionar" :key="Evolução.NrSeqEvolução" class="ModalEditarNovo PadrãoBranco">
+
+        <div class="TituloModal">
+          <h2 class="PadrãoLetraTomEscuro Fonte34">{{ Titulo }}</h2>
+          <div class="LinhaAbaixoTitulo PadrãoTomClaro"></div>
+        </div>
+
+        <div class="ModalDados">
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">Peso</p>
+            <input type="text" class="PadrãoLetraTomMédio" v-model="Evolução.Peso">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">Altura</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.Altura">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DCultanea</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DCultanea">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DenCorporal</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DenCorporal">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">FcMaxima</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.FcMaxima">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">FcRepouso</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.FcRepouso">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DistAtividade</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DistAtividade">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">TempAtividade</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.TempAtividade">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">NvAprendizado</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.NvAprendizado">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">CondFisico</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.CondFisico">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DtRegistro</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DtRegistro">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">NrSeqEvolução</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.NrSeqEvolução">
+          </div>
+          </div>
+        <div class="BotõesSalvarCancelar">
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="AdicionarEvolução()">Salvar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalEvolução()">Cancelar</button>
         </div>
       </div>
     </div>

@@ -23,13 +23,16 @@ data(){
     Titulo:'',
 
     Pessoas:null,
+    Evoluções: null,
     DBPessoas: [{
         id: 0,
         TipoPessoa:1,
+        CdPessoa: 4410,
         nome: "Raquel",
         idade: 41,
-        cpf: '00000000000',
+        cpf: '00100000000',
         Cref: '000000000',
+        Rg: '20333990',
         Whatsapp: '31987408888',
         telAlternativo: '31987408888',
         Nascimento: '13/08/1994',
@@ -39,6 +42,7 @@ data(){
         Cidade: 'Ipacity',
         Cep: '31163522',
         sexo: 'Femea',
+        DtNascimento:'',
 
         HoraAula: 20,
         Turmas: 1,
@@ -52,16 +56,19 @@ data(){
         Mãe: 'nazara',
 
         valorMensalidade: 100.00,
-
+        NrSeqEvolução:[],
+        
         status: 'Ativo'
     },
     {
         id: 2,
         TipoPessoa:1,
+        CdPessoa: 4411,
         nome: "Luana",
         idade: 41,
-        cpf: '00000000000',
+        cpf: '00200000000',
         Cref: '000000000',
+        Rg: '20333990',
         Whatsapp: '31987408888',
         telAlternativo: '31987408888',
         Nascimento: '13/08/1994',
@@ -71,6 +78,7 @@ data(){
         Cidade: 'Ipacity',
         Cep: '31163522',
         sexo: 'Femea',
+        DtNascimento:'',
 
         HoraAula: 20,
         Turmas: 1,
@@ -84,16 +92,19 @@ data(){
         Mãe: 'nazara',
 
         valorMensalidade: 100.00,
+        NrSeqEvolução:[],
 
         status: 'Ativo'
     },
     {
         id: 1,
         TipoPessoa:3,
+        CdPessoa: 4412,
         nome: "Jean",
         idade: 41,
         cpf: '00000000000',
         Cref: '000000000',
+        Rg: '20333990',
         Whatsapp: '31987408888',
         telAlternativo: '31987408888',
         Nascimento: '13/08/1994',
@@ -103,6 +114,7 @@ data(){
         Cidade: 'Ipacity',
         Cep: '31163522',
         sexo: 'Femea',
+        DtNascimento:'',
 
         HoraAula: 20,
         Turmas: 1,
@@ -116,16 +128,19 @@ data(){
         Mãe: 'nazara',
 
         valorMensalidade: 100.00,
+        NrSeqEvolução:[],
 
         status: 'Ativo'
     },
     {
         id: 3,
         TipoPessoa:3,
+        CdPessoa: 4414,
         nome: "Romário",
         idade: 41,
         cpf: '00000000000',
         Cref: '000000000',
+        Rg: '20333990',
         Whatsapp: '31987408888',
         telAlternativo: '31987408888',
         Nascimento: '13/08/1994',
@@ -135,6 +150,7 @@ data(){
         Cidade: 'Ipacity',
         Cep: '31163522',
         sexo: 'Femea',
+        DtNascimento:'',
 
         HoraAula: 20,
         Turmas: 1,
@@ -148,25 +164,60 @@ data(){
         Mãe: 'nazara',
 
         valorMensalidade: 100.00,
+        NrSeqEvolução:[312],
 
         status: 'Ativo'
-    }]
+    }],
+    DBEvolução:[{
+      Peso: 70,
+      Altura: 1.82,
+      DCultanea: 1.5,
+      DenCorporal: 2,
+      FcMaxima: 130,
+      FcRepouso: 70,
+      DistAtividade: 100,
+      TempAtividade: 5,
+      NvAprendizado: 2,
+      CondFisico: 4,
+      DtRegistro: '20/01/2023',  
+      NrSeqEvolução: 312
+      }/*,
+      {
+        Peso: 72,
+        Altura: 1.82,
+        DCultanea: 1.5,
+        DenCorporal: 2,
+        FcMaxima: 120,
+        FcRepouso: 65,
+        DistAtividade: 120,
+        TempAtividade: 5,
+        NvAprendizado: 2,
+        CondFisico: 5,
+        DtRegistro: '21/01/2023',  
+        NrSeqEvolução: 313
+      }*/]
   }
 },
 methods:{
-    ValidarAcesso(parametro){  
-      
+    ValidarAcesso(parametro){
       this.Acessante= this.DBPessoas.find((Pessoa) => (Pessoa.IdLogin == parametro.IdLogin))
        if (this.Acessante.SenhaLogin == parametro.SenhaLogin) {
           this.Login = true
           this.TpLogin = this.Acessante.TipoLogin
+      }else{
+        alert('Login ou Senha Incorretos')
       }
     },
-    AjusdarTado(){
-      
+    AjustarDado(parametro){
+      let par = parametro
+      this.DBPessoas = this.DBPessoas.filter((dado) => dado.id != par.id)
+      this.DBPessoas.push(par)
     },
     AdicionaDado(parametro){
       this.DBPessoas.push(parametro)
+    },
+    adicionarEvolução(parametro){
+      this.Evoluções.push(parametro)
     },
     acessarMenuOpções(){
       this.TipoAcesso=null
@@ -183,7 +234,7 @@ methods:{
     },
     acessarAlunos(){
       this.TipoAcesso=3
-      this.Pessoas = this.DBPessoas.filter((Pessoa) => (Pessoa.TipoPessoa == this.TipoAcesso));
+      this.Pessoas = this.DBPessoas.filter((Pessoa) => (Pessoa.TipoPessoa == this.TipoAcesso))
       this.Titulo = 'Alunos'
     },
     acessarFinanceiro(){

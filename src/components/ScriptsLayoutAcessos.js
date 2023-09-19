@@ -2,6 +2,7 @@ export default {
   name: 'LayoutPadrão',
   props:{Titulo: String,
          ListaPessoas: [],
+         DBEvolução:[],
          TipoAcesso: Number},
   data() {
     return {
@@ -10,8 +11,10 @@ export default {
       DadoFiltrado: null,
       DadoPesquisa: null,
       modalAtivo: false,
+      modalAtivoEvolução: false,
       dadoCarregado: null,
-      EmEdição:null,
+      EmEdição:false,
+      EvoluçãoAdicionar:[],
       DadoAdicionar: {
         id: null,
         TipoPessoa:null,
@@ -45,52 +48,50 @@ export default {
     
   },
   methods:{
+    //Lógica para Evolução
+    ExibirModalEvolução(parametro){
+      let par = parametro
+      par.map((evoluçãoAtual) => {
+        this.EvoluçãoAdicionar = []
+        let armazena=this.DBEvolução.filter((dado) => dado.NrSeqEvolução = evoluçãoAtual)
+        this.EvoluçãoAdicionar.push(armazena)
+      })
+      this.modalAtivoEvolução = true
+    },
+    AdicionarEvolução(){
+      this.DBEvolução.push(this.EvoluçãoAdicionar)
+      this.$emit('adicionarEvolução', this.EvoluçãoAdicionar)
+      this.FecharModal()
+    },    
+    FecharModalEvolução(){
+      this.modalAtivoEvolução = false
+    },
+
+    //Lógica para exebição e iterações de dados Pessoa
     AjustarDado(){
-      this.DadoFiltrado = this.DadoFiltrado.filter((dado) => dado.id != this.DadoAdicionar.id)
-      this.DadoFiltrado.push(this.DadoAdicionar)
-      //this.ListaPessoas.push(this.DadoAdicionar)
-      //this.$emit('adicionarDado', this.DadoAdicionar)
+      let par = this.DadoAdicionar
+      this.DadoFiltrado = this.DadoFiltrado.filter((dado) => dado.id != par.id)
+      this.DadoFiltrado.push(par)
+      //this.ListaPessoas.push(par)
+      this.$emit('ajustarDado', par)
       this.FecharModal()
       //this.LimparModal()
     },
     EditarPessoa(parametro){
       this.EmEdição = true
-      this.DadoAdicionar.id = parametro.id,
-      this.DadoAdicionar.TipoPessoa=parametro.TipoPessoa,
-      this.DadoAdicionar.nome= parametro.nome,
-      this.DadoAdicionar.idade= parametro.idade,
-      this.DadoAdicionar.cpf= parametro.cpf,
-      this.DadoAdicionar.Cref= parametro.Cref,
-      this.DadoAdicionar.Whatsapp= parametro.Whatsapp,
-      this.DadoAdicionar.telAlternativo= parametro.telAlternativo,
-      this.DadoAdicionar.Nascimento= parametro.Nascimento,
-      this.DadoAdicionar.Rua= parametro.Rua,
-      this.DadoAdicionar.NRua= parametro.NRua,
-      this.DadoAdicionar.Bairro= parametro.Bairro,
-      this.DadoAdicionar.Cidade= parametro.Cidade,
-      this.DadoAdicionar.Cep= parametro.Cep,
-      this.DadoAdicionar.sexo= parametro.sexo,
-
-      this.DadoAdicionar.HoraAula= parametro.HoraAula,
-      this.DadoAdicionar.Turmas= parametro.Turmas,
-      this.DadoAdicionar.ProporcaoSalarial=parametro.ProporcaoSalarial,
-
-      this.DadoAdicionar.Turma= parametro.Turma,
-      this.DadoAdicionar.Pae= parametro.Pae,
-      this.DadoAdicionar.Mãe= parametro.Mãe,
-      this.DadoAdicionar.valorMensalidade= parametro.valorMensalidade,
-
-      this.DadoAdicionar.status= parametro.status
-      this.ExibirModal()
+      let par = parametro
+      this.DadoAdicionar = par
     },
     carregaDado(parametro){
-      this.dadoCarregado = parametro
+      let par = parametro
+      this.dadoCarregado = par
     },
-    AdicionarDado(){
-      this.DadoAdicionar.status = 'Ativo'
-      this.DadoAdicionar.TipoPessoa = this.TipoAcesso
-      this.ListaPessoas.push(this.DadoAdicionar)
-      this.$emit('adicionarDado', this.DadoAdicionar)
+    AdicionarDado(parametro){
+      let par = parametro
+      par.status = 'Ativo'
+      par.TipoPessoa = this.TipoAcesso
+      this.ListaPessoas.push(par)
+      this.$emit('adicionarDado', par)
       this.FecharModal()
     },
     ExibirModal(){
@@ -98,6 +99,7 @@ export default {
     },
     FecharModal(){
       this.modalAtivo = false
+      this.EmEdição = false
     },
     ExibirMaisInfo(){
       if (this.Exibir === false){
@@ -117,33 +119,44 @@ export default {
       }
     },
     LimparModal(){      
-      this.DadoAdicionar.id = null,
-      this.DadoAdicionar.TipoPessoa=null,
-      this.DadoAdicionar.nome= null,
-      this.DadoAdicionar.idade= null,
-      this.DadoAdicionar.cpf= null,
-      this.DadoAdicionar.Cref= null,
-      this.DadoAdicionar.Whatsapp= null,
-      this.DadoAdicionar.telAlternativo= null,
-      this.DadoAdicionar.Nascimento= null,
-      this.DadoAdicionar.Rua= null,
-      this.DadoAdicionar.NRua= null,
-      this.DadoAdicionar.Bairro= null,
-      this.DadoAdicionar.Cidade= null,
-      this.DadoAdicionar.Cep= null,
-      this.DadoAdicionar.sexo= null,
-
-      this.DadoAdicionar.HoraAula= null,
-      this.DadoAdicionar.Turmas= null,
-      this.DadoAdicionar.ProporcaoSalarial=null,
-
-      this.DadoAdicionar.Turma= null,
-      this.DadoAdicionar.Pae= null,
-      this.DadoAdicionar.Mãe= null,
-      this.DadoAdicionar.valorMensalidade= null,
-
-      this.DadoAdicionar.status= null
-    }
+      this.DadoAdicionar=null
+    },
+    
+    novaPessoa(id,TipoPessoa,CdPessoa,nome,idade,
+      cpf,Cref,Rg,Whatsapp,telAlternativo,Nascimento,Rua,NRua,Bairro,
+      Cidade,Cep,sexo,DtNascimento,HoraAula,Turmas,ProporcaoSalarial,IdLogin,
+      SenhaLogin,TipoLogin,Turma,Pae,Mãe,valorMensalidade,NrSeqEvolução,status){
+      this.id=id,
+      this.TipoPessoa=TipoPessoa,
+      this.CdPessoa=CdPessoa,
+      this.nome=nome,
+      this.idade=idade,
+      this.cpf=cpf,
+      this.Cref=Cref,
+      this.Rg=Rg,
+      this.Whatsapp=Whatsapp,
+      this.telAlternativo=telAlternativo,
+      this.Nascimento=Nascimento,
+      this.Rua=Rua,
+      this.NRua=NRua,
+      this.Bairro=Bairro,
+      this.Cidade=Cidade,
+      this.Cep=Cep,
+      this.sexo=sexo,
+      this.DtNascimento=DtNascimento,
+      this.HoraAula=HoraAula,
+      this.Turmas=Turmas,
+      this.ProporcaoSalarial=ProporcaoSalarial,
+      this.IdLogin=IdLogin,
+      this.SenhaLogin=SenhaLogin,
+      this.TipoLogin=TipoLogin,
+      this.Turma=Turma,
+      this.Pae=Pae,
+      this.Mãe=Mãe,
+      this.valorMensalidade=valorMensalidade,
+      this.NrSeqEvolução=NrSeqEvolução,
+      this.status=status
+    },
   },
   mounted() {
     this.DadoFiltrado = this.ListaPessoas
