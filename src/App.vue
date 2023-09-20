@@ -28,6 +28,7 @@
                   :ListaPessoas="Pessoas"
                   :TipoAcesso="TipoAcesso"
                   :DBEvolução="DBEvolução"
+                  :ListagemTurmas="ListaTurmas"
     />
     <Acesso v-if="Login==false"
             @acessar="ValidarAcesso($event)"

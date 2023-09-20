@@ -10,7 +10,7 @@
           </button>
       </div>
 
-      <section class="tabela">
+      <section class="tabela"  v-if="TipoAcesso==1 || TipoAcesso==3">
         <tr v-for="(Pessoa, id) in DadoFiltrado" :key="Pessoa.id" class="PadrãoBranco" @click="carregaDado(Pessoa)">
           <p v-if="DebugaId">{{ id }}</p>
           <div class="Marcador PadrãoBranco">
@@ -80,6 +80,31 @@
             <p class="PadrãoLetraTomClaro PadrãoBranco">Sexo</p>
           <td class="PadrãoBranco PadrãoLetraTomMédio">{{Pessoa.sexo}}</td>
           </div>
+        </tr>
+      </section>
+
+      <section class="tabela" v-if="TipoAcesso==2">
+        <tr v-for="(Turma, NrSeqTurma) in ListagemTurmas" :key="Turma.NrSeqTurma" class="PadrãoBranco" @click="carregaDado(Turma)">
+          <p v-if="DebugaId">{{ NrSeqTurma }}</p>
+          <div class="Marcador PadrãoBranco">
+            <p class="PadrãoLetraTomClaro PadrãoBranco">Limite de Alunos</p>
+            <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.LimiteAlunos}}</td>
+          </div>
+          <div class="Marcador PadrãoBranco">
+            <p class="PadrãoLetraTomClaro PadrãoBranco">Dia da Semana</p>
+            <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.DiaSemana}}</td>
+          </div>
+          <div class="Marcador PadrãoBranco">
+            <p class="PadrãoLetraTomClaro PadrãoBranco">Valor</p>
+            <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Valor}}</td>
+          </div>
+          <div class="Marcador PadrãoBranco">
+            <p class="PadrãoLetraTomClaro PadrãoBranco">Data Cadastro</p>
+            <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.DataCadastro}}</td>
+          </div>
+          <img class="PadrãoLetraTomClaro PadrãoBranco MaisInfo" src="..\assets\MaisInfo.svg" alt="Mais" v-on:click="ExibirMaisInfo(Pessoa.id)" v-show="Exibir==false">
+          <img class="PadrãoLetraTomClaro PadrãoBranco MenosInfo" src="..\assets\MenosInfo.svg" alt="Menos" v-on:click="ExibirMenosInfo(Pessoa.id)" v-show="Exibir==true">
+          
         </tr>
       </section>
     </div>

@@ -20,8 +20,8 @@ data(){
     Alunos: "Alunos",
     Financeiro: "Financeiro",
     TpLogin: '',
-    Titulo:'',
-
+    Titulo: '',
+    ListaTurmas: [],
     Pessoas:null,
     Evoluções: null,
     DBPessoas: [{
@@ -45,7 +45,7 @@ data(){
         DtNascimento:'',
 
         HoraAula: 20,
-        Turmas: 1,
+        NrSeqTurma: 1,
         ProporcaoSalarial:20,
         IdLogin: 'Admin',
         SenhaLogin: 'Admin!',
@@ -81,7 +81,7 @@ data(){
         DtNascimento:'',
 
         HoraAula: 20,
-        Turmas: 1,
+        NrSeqTurma: 1,
         ProporcaoSalarial:20,
         IdLogin: 'Prof',
         SenhaLogin: 'Prof!',
@@ -117,7 +117,7 @@ data(){
         DtNascimento:'',
 
         HoraAula: 20,
-        Turmas: 1,
+        NrSeqTurma: null,
         ProporcaoSalarial:20,
         IdLogin: '',
         SenhaLogin: '',
@@ -153,7 +153,7 @@ data(){
         DtNascimento:'',
 
         HoraAula: 20,
-        Turmas: 1,
+        NrSeqTurma: null,
         ProporcaoSalarial:20,
         IdLogin: '',
         SenhaLogin: '',
@@ -195,7 +195,26 @@ data(){
         CondFisico: 5,
         DtRegistro: '21/01/2023',  
         NrSeqEvolução: 313
-      }*/]
+      }*/],
+  DbTurmas:[{
+    NrSeqTurma: 1,
+    LimiteAlunos: 6,
+    Horário:15,
+    DiaSemana: 'Terça-feira',
+    Valor:80,
+    DataCadastro:'01/08/2023',
+    Professores:[4410,4411],
+    Alunos:[4412,4413]
+  },{
+    NrSeqTurma: 2,
+    LimiteAlunos: 6,
+    Horário:15,
+    DiaSemana: 'Terça-feira',
+    Valor:80,
+    DataCadastro:'01/08/2023',
+    Professores:['Raquel','Luana'],
+    Alunos:['Jean','Romário']
+  }]
   }
 },
 methods:{
@@ -229,7 +248,8 @@ methods:{
     },
     acessarTurmas(){
       this.TipoAcesso=2
-      this.Pessoas = this.DBPessoas.filter((Pessoa) => (Pessoa.TipoPessoa == this.TipoAcesso));
+      this.ListaTurmas=this.DbTurmas
+      this.Pessoas=this.DBPessoas
       this.Titulo = 'Turmas'
     },
     acessarAlunos(){

@@ -1,9 +1,10 @@
 export default {
   name: 'LayoutPadrão',
   props:{Titulo: String,
+         TipoAcesso: Number,
          ListaPessoas: [],
          DBEvolução:[],
-         TipoAcesso: Number},
+         ListagemTurmas:[]},
   data() {
     return {
       Exibir: false,
@@ -48,12 +49,15 @@ export default {
     
   },
   methods:{
+    //Lógica para Turmas
+    
+
     //Lógica para Evolução
     ExibirModalEvolução(parametro){
       let par = parametro
       par.map((evoluçãoAtual) => {
         this.EvoluçãoAdicionar = []
-        let armazena=this.DBEvolução.filter((dado) => dado.NrSeqEvolução = evoluçãoAtual)
+        let armazena=this.DBEvolução.filter((dado) => dado.NrSeqEvolução == evoluçãoAtual)
         this.EvoluçãoAdicionar.push(armazena)
       })
       this.modalAtivoEvolução = true
@@ -85,6 +89,7 @@ export default {
     carregaDado(parametro){
       let par = parametro
       this.dadoCarregado = par
+      console.log([...parametro.Professores])
     },
     AdicionarDado(parametro){
       let par = parametro
