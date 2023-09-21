@@ -1,6 +1,7 @@
 .BordaArredondada{
   border-radius: 20px;
-}.NúmeroTurma{
+}
+.NúmeroTurma{
   margin: 0% 20px 0% 0px;
 }
 .EmLinha{
@@ -131,9 +132,9 @@ td{
 .Marcador{
   display: flex;
   flex-direction: column;
-  /*margin: 0 2vw;
+  margin: 0 2vw;
   height: 3vw;
-  width: 10vw;*/
+  width: 10vw;
 }
 .Corpo{
   display: flex;
