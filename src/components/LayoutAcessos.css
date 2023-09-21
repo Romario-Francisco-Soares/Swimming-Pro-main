@@ -10,12 +10,21 @@
   flex-direction: row;
   justify-content: space-around;
 
-}.EmColuna{
+}
+.EmColuna{
   display: flex;
   flex-wrap: wrap;
   flex-direction: column;
 
-}.BotõesSalvarCancelar > button{
+}
+.BotõesSalvarCancelar > button{
+  width: 25%;
+  height: 40px;
+  border-radius: 10px;
+  border: none;
+  margin: -8% 5% 0 0;
+}
+.BotõesSalvarCancelar > button{
   width: 25%;
   height: 40px;
   border-radius: 10px;
@@ -49,7 +58,6 @@
   justify-content: space-between;
   width: 90%;
   height: 70%;
-
 }.LinhaAbaixoTitulo{
   width: 100px;
   height: 3px;
@@ -110,11 +118,8 @@ p{
 }
 tr{
   display: flex;
-  flex-direction: row;
   align-content: flex-start;
   flex-wrap: wrap;
-  justify-content: center;
-  align-items: center;
   flex: 0 1 auto;
   margin: 0.5vw;
   border-radius: 20px;
@@ -185,7 +190,6 @@ footer{
   display: flex;
   flex-direction: center;
   justify-content: center;
-
 }
 .DadosBusca{
   height: 2.8vw;
