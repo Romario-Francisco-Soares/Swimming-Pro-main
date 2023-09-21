@@ -197,23 +197,38 @@ data(){
         NrSeqEvolução: 313
       }*/],
   DbTurmas:[{
-    NrSeqTurma: 1,
-    LimiteAlunos: 6,
-    Horário:15,
-    DiaSemana: 'Terça-feira',
+    NrSeqTurma: 105,
+    LimiteAlunos: 3,
     Valor:80,
     DataCadastro:'01/08/2023',
-    Professores:[4410,4411],
-    Alunos:[4412,4413]
+    
+    DiaSemana: ['Quarta-feira','Quinta-feira','Sexta-feira'],
+    Horário:['09:00','09:00','09:00'],
+    Duração:['40min','40min','40min'],
+    Professores:['Raquel','Luana','Augusta'],
+    Alunos:['Jean','Romário', 'Michely']
   },{
-    NrSeqTurma: 2,
-    LimiteAlunos: 6,
-    Horário:15,
-    DiaSemana: 'Terça-feira',
+    NrSeqTurma: 205,
+    LimiteAlunos: 3,
     Valor:80,
     DataCadastro:'01/08/2023',
-    Professores:['Raquel','Luana'],
-    Alunos:['Jean','Romário']
+    
+    DiaSemana: ['Quarta-feira','Quinta-feira','Sexta-feira'],
+    Horário:['10:00','10:00','10:00'],
+    Duração:['40min','40min','40min'],
+    Professores:['Raquel','Luana','Augusta'],
+    Alunos:['Jean','Romário', 'Michely']
+  },{
+    NrSeqTurma: 305,
+    LimiteAlunos: 3,
+    Valor:80,
+    DataCadastro:'02/08/2023',
+    
+    DiaSemana: ['Quarta-feira','Quinta-feira','Sexta-feira'],
+    Horário:['19:00','19:00','19:00'],
+    Duração:['40min','40min','40min'],
+    Professores:['Raquel','Luana','Augusta'],
+    Alunos:['Jean','Romário', 'Michely']
   }]
   }
 },

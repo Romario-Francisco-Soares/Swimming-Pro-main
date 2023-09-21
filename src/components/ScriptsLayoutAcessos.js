@@ -125,43 +125,7 @@ export default {
     },
     LimparModal(){      
       this.DadoAdicionar=null
-    },
-    
-    novaPessoa(id,TipoPessoa,CdPessoa,nome,idade,
-      cpf,Cref,Rg,Whatsapp,telAlternativo,Nascimento,Rua,NRua,Bairro,
-      Cidade,Cep,sexo,DtNascimento,HoraAula,Turmas,ProporcaoSalarial,IdLogin,
-      SenhaLogin,TipoLogin,Turma,Pae,Mãe,valorMensalidade,NrSeqEvolução,status){
-      this.id=id,
-      this.TipoPessoa=TipoPessoa,
-      this.CdPessoa=CdPessoa,
-      this.nome=nome,
-      this.idade=idade,
-      this.cpf=cpf,
-      this.Cref=Cref,
-      this.Rg=Rg,
-      this.Whatsapp=Whatsapp,
-      this.telAlternativo=telAlternativo,
-      this.Nascimento=Nascimento,
-      this.Rua=Rua,
-      this.NRua=NRua,
-      this.Bairro=Bairro,
-      this.Cidade=Cidade,
-      this.Cep=Cep,
-      this.sexo=sexo,
-      this.DtNascimento=DtNascimento,
-      this.HoraAula=HoraAula,
-      this.Turmas=Turmas,
-      this.ProporcaoSalarial=ProporcaoSalarial,
-      this.IdLogin=IdLogin,
-      this.SenhaLogin=SenhaLogin,
-      this.TipoLogin=TipoLogin,
-      this.Turma=Turma,
-      this.Pae=Pae,
-      this.Mãe=Mãe,
-      this.valorMensalidade=valorMensalidade,
-      this.NrSeqEvolução=NrSeqEvolução,
-      this.status=status
-    },
+    }
   },
   mounted() {
     this.DadoFiltrado = this.ListaPessoas
