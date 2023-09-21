@@ -123,6 +123,19 @@
               </div>
             </div>
 
+          <img class="PadrãoLetraTomClaro PadrãoBranco MaisInfo" src="..\assets\MaisInfo.svg" alt="Mais" v-on:click="ExibirMaisInfo(Turma.NrSeqTurma)" v-show="Exibir==false">
+          <img class="PadrãoLetraTomClaro PadrãoBranco MenosInfo" src="..\assets\MenosInfo.svg" alt="Menos" v-on:click="ExibirMenosInfo(Turma.NrSeqTurma)" v-show="Exibir==true">          
+          
+          <!--<div class="PadrãoBranco" v-show="Exibir">
+              <p class="PadrãoBranco PadrãoLetraTomMédio">Alunos</p>
+              <div class="EmColuna">
+              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Alunos[0]}}</td>
+              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Alunos[1]}}</td>
+              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Alunos[2]}}</td>
+              </div>
+            </div>
+          -->
+
           </div>
           
         </tr>
