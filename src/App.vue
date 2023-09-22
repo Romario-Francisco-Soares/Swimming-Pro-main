@@ -1,11 +1,12 @@
 <template>
-
   <!--Git Status
       git add .
       git commit -m 'PrimeiroEnvio'
       git push origin main
   -->
-  
+  <div class="tituloPrincipal">
+    <h1 class="PadrãoLetraTomEscuro Fonte34" v-if="TipoAcesso==null && Login">Swimming - Pro</h1>
+  </div>
   <div class="CorpoPrincipal">
     <MenuOpcoes v-if="TipoAcesso==null && Login"
                 @AcessarParceiros="acessarParceiros()"

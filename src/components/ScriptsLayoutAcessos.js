@@ -15,7 +15,20 @@ export default {
       modalAtivoEvolução: false,
       dadoCarregado: null,
       EmEdição:false,
-      EvoluçãoAdicionar:[],
+      EvoluçãoAdicionar:[]/* {
+        Peso: null,
+        Altura: null,
+        DCultanea: null,
+        DenCorporal: null,
+        FcMaxima: null,
+        FcRepouso: null,
+        DistAtividade: null,
+        TempAtividade: null,
+        NvAprendizado: null,
+        CondFisico: null,
+        DtRegistro: null,  
+        NrSeqEvolução: null
+      }*/,
       DadoAdicionar: {
         id: null,
         TipoPessoa:null,
@@ -53,43 +66,55 @@ export default {
     
 
     //Lógica para Evolução
-    ExibirModalEvolução(parametro){
-      let par = parametro
-      par.map((evoluçãoAtual) => {
-        this.EvoluçãoAdicionar = []
-        let armazena=this.DBEvolução.filter((dado) => dado.NrSeqEvolução == evoluçãoAtual)
-        this.EvoluçãoAdicionar.push(armazena)
-      })
-      this.modalAtivoEvolução = true
+    ExibirModalEvolução(){
+      if(this.EvoluçãoAdicionar.length==0){
+        alert('Selecione um Aluno')
+      }else{
+        this.modalAtivoEvolução = true
+      }
     },
-    AdicionarEvolução(){
-      this.DBEvolução.push(this.EvoluçãoAdicionar)
-      this.$emit('adicionarEvolução', this.EvoluçãoAdicionar)
-      this.FecharModal()
+    SalvarEvolução(){
+      const par = this.EvoluçãoAdicionar[0]
+      const index = this.DBEvolução.findIndex((dado) => dado.NrSeqEvolução == par[0].NrSeqEvolução);
+      this.DBEvolução[index] = par[0];
+      this.FecharModalEvolução()
+      this.EvoluçãoAdicionar.pop()
     },    
     FecharModalEvolução(){
+      this.EvoluçãoAdicionar.pop()
       this.modalAtivoEvolução = false
     },
 
     //Lógica para exebição e iterações de dados Pessoa
     AjustarDado(){
       let par = this.DadoAdicionar
-      this.DadoFiltrado = this.DadoFiltrado.filter((dado) => dado.id != par.id)
-      this.DadoFiltrado.push(par)
-      //this.ListaPessoas.push(par)
+      const index = this.DadoFiltrado.findIndex((dado) => dado.id === par.id);
+      this.DadoFiltrado[index] = {...par};
       this.$emit('ajustarDado', par)
       this.FecharModal()
-      //this.LimparModal()
     },
     EditarPessoa(parametro){
       this.EmEdição = true
       let par = parametro
-      this.DadoAdicionar = par
+      this.DadoAdicionar = {...par};
+    },
+    carregaDadoTurma(parametro){
+      let par = parametro
+      this.dadoCarregado = par
     },
     carregaDado(parametro){
       let par = parametro
       this.dadoCarregado = par
-      console.log([...parametro.Professores])
+      if(this.TipoAcesso === 3){
+        const evol = this.DBEvolução
+        const index = this.DBEvolução.findIndex((dado) => dado.NrSeqEvolução == par.NrSeqEvolução);
+        if(this.EvoluçãoAdicionar.length == 1){
+          this.EvoluçãoAdicionar.pop()
+          this.EvoluçãoAdicionar.push(evol[index])          
+        }else{
+          this.EvoluçãoAdicionar.push(evol[index])
+        }
+      }
     },
     AdicionarDado(parametro){
       let par = parametro
@@ -99,7 +124,11 @@ export default {
       this.$emit('adicionarDado', par)
       this.FecharModal()
     },
-    ExibirModal(){
+    ExibirModalNovo(){
+      this.modalAtivo = true
+      this.LimparModal()
+    },
+    ExibirModalEditar(){
       this.modalAtivo = true
     },
     FecharModal(){
@@ -124,7 +153,34 @@ export default {
       }
     },
     LimparModal(){      
-      this.DadoAdicionar=null
+      
+      this.DadoAdicionar.id= null,
+      this.DadoAdicionar.TipoPessoa=null,
+      this.DadoAdicionar.nome= null,
+      this.DadoAdicionar.idade= null,
+      this.DadoAdicionar.cpf= null,
+      this.DadoAdicionar.Cref= null,
+      this.DadoAdicionar.Whatsapp= null,
+      this.DadoAdicionar.telAlternativo= null,
+      this.DadoAdicionar.Nascimento= null,
+      this.DadoAdicionar.Rua= null,
+      this.DadoAdicionar.NRua= null,
+      this.DadoAdicionar.Bairro= null,
+      this.DadoAdicionar.Cidade= null,
+      this.DadoAdicionar.Cep= null,
+      this.DadoAdicionar.sexo= null,
+
+      this.DadoAdicionar.HoraAula= null,
+      this.DadoAdicionar.Turmas= null,
+      this.DadoAdicionar.ProporcaoSalarial=null,
+
+      this.DadoAdicionar.Turma= null,
+      this.DadoAdicionar.Pae= null,
+      this.DadoAdicionar.Mãe= null,
+
+      this.DadoAdicionar.valorMensalidade= null,
+
+      this.DadoAdicionar.status= null
     }
   },
   mounted() {

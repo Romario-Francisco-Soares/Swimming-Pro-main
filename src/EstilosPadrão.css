@@ -1,9 +1,16 @@
 
 * {
     font-family: 'Inter', sans-serif;
+    
+  }
+  .tituloPrincipal{
+    display: flex;
+    justify-content: center;
+    width: 100%;
   }
   .CorpoPrincipal{
     background-image: url("/src/assets/Adornos.svg");
+    height: 800px;
     background-size: 40vw;
     background-repeat: no-repeat;
     background-attachment: fixed;

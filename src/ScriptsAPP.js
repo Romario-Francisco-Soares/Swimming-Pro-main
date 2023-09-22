@@ -128,7 +128,7 @@ data(){
         Mãe: 'nazara',
 
         valorMensalidade: 100.00,
-        NrSeqEvolução:[],
+        NrSeqEvolução:[313],
 
         status: 'Ativo'
     },
@@ -181,9 +181,9 @@ data(){
       CondFisico: 4,
       DtRegistro: '20/01/2023',  
       NrSeqEvolução: 312
-      }/*,
+      },
       {
-        Peso: 72,
+        Peso: 80,
         Altura: 1.82,
         DCultanea: 1.5,
         DenCorporal: 2,
@@ -195,7 +195,7 @@ data(){
         CondFisico: 5,
         DtRegistro: '21/01/2023',  
         NrSeqEvolução: 313
-      }*/],
+      }],
   DbTurmas:[{
     NrSeqTurma: 105,
     LimiteAlunos: 3,
@@ -205,7 +205,7 @@ data(){
     DiaSemana: ['Quarta-feira','Quinta-feira','Sexta-feira'],
     Horário:['09:00','09:00','09:00'],
     Duração:['40min','40min','40min'],
-    Professores:['Raquel','Luana','Augusta'],
+    Professor:'Raquel',
     Alunos:['Jean','Romário', 'Michely']
   },{
     NrSeqTurma: 205,
@@ -216,7 +216,7 @@ data(){
     DiaSemana: ['Quarta-feira','Quinta-feira','Sexta-feira'],
     Horário:['10:00','10:00','10:00'],
     Duração:['40min','40min','40min'],
-    Professores:['Raquel','Luana','Augusta'],
+    Professor:'Luana',
     Alunos:['Jean','Romário', 'Michely']
   },{
     NrSeqTurma: 305,
@@ -227,7 +227,7 @@ data(){
     DiaSemana: ['Quarta-feira','Quinta-feira','Sexta-feira'],
     Horário:['19:00','19:00','19:00'],
     Duração:['40min','40min','40min'],
-    Professores:['Raquel','Luana','Augusta'],
+    Professor:'Augusta',
     Alunos:['Jean','Romário', 'Michely']
   }]
   }
@@ -244,8 +244,8 @@ methods:{
     },
     AjustarDado(parametro){
       let par = parametro
-      this.DBPessoas = this.DBPessoas.filter((dado) => dado.id != par.id)
-      this.DBPessoas.push(par)
+      const index = this.DBPessoas.findIndex((dado) => dado.id === par.id);
+      this.DBPessoas[index] = {...par};
     },
     AdicionaDado(parametro){
       this.DBPessoas.push(parametro)

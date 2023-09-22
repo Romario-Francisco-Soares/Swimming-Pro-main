@@ -84,12 +84,12 @@
       </section>
 
       <section class="tabela" v-if="TipoAcesso==2">
-        <tr v-for="(Turma) in ListagemTurmas" :key="Turma.NrSeqTurma" @click="carregaDado(Turma)">
+        <tr v-for="(Turma) in ListagemTurmas" :key="Turma.NrSeqTurma" @click="carregaDadoTurma(Turma)">
           <h2 class="Fonte24 PadrãoLetraTomMédio NúmeroTurma">{{ Turma.NrSeqTurma }}</h2>
           <div class="PadrãoBranco EmLinha BordaArredondada" >
             <div class="PadrãoBranco">
               <div class="EmColuna">
-              <p class="PadrãoBranco PadrãoLetraTomMédio">Dias</p>
+              <p class="PadrãoBranco PadrãoLetraTomMédio Fonte24">Dias</p>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.DiaSemana[0]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.DiaSemana[1]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.DiaSemana[2]}}</td>
@@ -98,7 +98,7 @@
             
             <div class="PadrãoBranco">
               <div class="EmColuna">
-              <p class="PadrãoBranco PadrãoLetraTomMédio">Horário</p>
+              <p class="PadrãoBranco PadrãoLetraTomMédio Fonte24">Horário</p>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Horário[0]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Horário[1]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Horário[2]}}</td>
@@ -106,7 +106,7 @@
             </div>
                         
             <div class="PadrãoBranco">
-              <p class="PadrãoBranco PadrãoLetraTomMédio">Duração</p>
+              <p class="PadrãoBranco PadrãoLetraTomMédio Fonte24">Duração</p>
               <div class="EmColuna">
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Duração[0]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Duração[1]}}</td>
@@ -115,27 +115,24 @@
             </div>
 
             <div class="PadrãoBranco">
-              <p class="PadrãoBranco PadrãoLetraTomMédio">Professores</p>
+              <p class="PadrãoBranco PadrãoLetraTomMédio Fonte24">Professor</p>
               <div class="EmColuna">
-              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Professores[0]}}</td>
-              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Professores[1]}}</td>
-              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Professores[2]}}</td>
+              <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Professor}}</td>
               </div>
             </div>
 
-          <img class="PadrãoLetraTomClaro PadrãoBranco MaisInfo" src="..\assets\MaisInfo.svg" alt="Mais" v-on:click="ExibirMaisInfo(Turma.NrSeqTurma)" v-show="Exibir==false">
-          <img class="PadrãoLetraTomClaro PadrãoBranco MenosInfo" src="..\assets\MenosInfo.svg" alt="Menos" v-on:click="ExibirMenosInfo(Turma.NrSeqTurma)" v-show="Exibir==true">          
-          
-          <!--<div class="PadrãoBranco" v-show="Exibir">
-              <p class="PadrãoBranco PadrãoLetraTomMédio">Alunos</p>
+          <div class="PadrãoBranco" v-show="Exibir">
+              <p class="PadrãoBranco PadrãoLetraTomMédio Fonte24">Alunos</p>
               <div class="EmColuna">
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Alunos[0]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Alunos[1]}}</td>
               <td class="PadrãoBranco PadrãoLetraTomMédio">{{Turma.Alunos[2]}}</td>
               </div>
             </div>
-          -->
 
+          <img class="PadrãoLetraTomClaro PadrãoBranco MaisInfo" src="..\assets\MaisInfo.svg" alt="Mais" v-on:click="ExibirMaisInfo(Turma.NrSeqTurma)" v-show="Exibir==false">
+          <img class="PadrãoLetraTomClaro PadrãoBranco MenosInfo" src="..\assets\MenosInfo.svg" alt="Menos" v-on:click="ExibirMenosInfo(Turma.NrSeqTurma)" v-show="Exibir==true">          
+          
           </div>
           
         </tr>
@@ -143,21 +140,21 @@
     </div>
 
     <footer>
-    <div class="botõesOpções PadrãoBranco" @click="ExibirModalEvolução(this.dadoCarregado.NrSeqEvolução)" v-if="TipoAcesso==3" >
+    <div class="botõesOpções PadrãoBranco" @click="ExibirModalEvolução()" v-if="TipoAcesso==3" >
       <div class="PadrãoRosa CirculoOpções2 ">
         <img class="PadrãoRosa EditarNovoEtc" src="..\assets\CadastrarParceiro.svg" alt="">
       </div>
       <h2 class="PadrãoLetraTomMédio Fonte16">Evoluir</h2>
     </div>
 
-    <div class="botõesOpções PadrãoBranco"  @click="EditarPessoa(this.dadoCarregado), this.ExibirModal()">
+    <div class="botõesOpções PadrãoBranco"  @click="EditarPessoa(this.dadoCarregado), this.ExibirModalEditar()">
       <div class="PadrãoRosa CirculoOpções2">
         <img class="PadrãoRosa EditarNovoEtc" src="..\assets\edit.svg" alt="">
       </div>
       <h2 class="PadrãoLetraTomEscuro Fonte16">Editar</h2>
     </div>
 
-    <div class="botõesOpções PadrãoBranco" @click="ExibirModal()">
+    <div class="botõesOpções PadrãoBranco" @click="ExibirModalNovo()">
       <div class="PadrãoRosa CirculoOpções2 ">
         <img class="PadrãoRosa EditarNovoEtc" src="..\assets\CadastrarParceiro.svg" alt="">
       </div>
@@ -304,11 +301,78 @@
           </div>
           </div>
         <div class="BotõesSalvarCancelar">
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="SalvarEvolução()">Salvar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalEvolução()">Cancelar</button>
+        </div>
+      </div>
+    </div>
+
+    <!--
+    <div  v-if="modalAtivoEvolução" class="BackModal">
+      <div v-for="(Evolução) in EvoluçãoAdicionar" :key="Evolução.NrSeqEvolução" class="ModalEditarNovo PadrãoBranco">
+
+        <div class="TituloModal">
+          <h2 class="PadrãoLetraTomEscuro Fonte34">{{ Titulo }}</h2>
+          <div class="LinhaAbaixoTitulo PadrãoTomClaro"></div>
+        </div>
+
+        <div class="ModalDados">
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">Peso</p>
+            <input type="text" class="PadrãoLetraTomMédio" v-model="Evolução.Peso">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">Altura</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.Altura">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DCultanea</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DCultanea">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DenCorporal</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DenCorporal">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">FcMaxima</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.FcMaxima">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">FcRepouso</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.FcRepouso">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DistAtividade</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DistAtividade">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">TempAtividade</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.TempAtividade">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">NvAprendizado</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.NvAprendizado">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">CondFisico</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.CondFisico">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">DtRegistro</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DtRegistro">
+          </div>
+          <div class="dado">
+            <p class="PadrãoLetraTomClaro">NrSeqEvolução</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.NrSeqEvolução">
+          </div>
+          </div>
+        <div class="BotõesSalvarCancelar">
           <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="AdicionarEvolução()">Salvar</button>
           <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalEvolução()">Cancelar</button>
         </div>
       </div>
     </div>
+-->
 </template>
 
 <script src="./ScriptsLayoutAcessos.js" />

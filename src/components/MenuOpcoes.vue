@@ -1,19 +1,19 @@
 <template>
   <div id="containerPrincipal">
     <div id="containerMenuOpcoes">
-      <div class="BoxOpções" @click="$emit('AcessarParceiros')">
+      <div class="BoxOpções PadrãoBranco" @click="$emit('AcessarParceiros')">
         <div class="PadrãoVerdeAgua CirculoOpções"><img src="..\assets\Parceiros.svg" alt=""></div>
         <h2 class="PadrãoLetraTomEscuro">{{ Parceiros }}</h2>
       </div>
-      <div class="BoxOpções" @click="$emit('AcessarTurmas')">
+      <div class="BoxOpções PadrãoBranco" @click="$emit('AcessarTurmas')">
         <div class="PadrãoRosa CirculoOpções"><img src="..\assets\Turmas.svg" alt=""></div>
         <h2 class="PadrãoLetraTomEscuro">{{ Turmas }}</h2>
       </div>
-      <div class="BoxOpções" @click="$emit('AcessarAlunos')">
+      <div class="BoxOpções PadrãoBranco" @click="$emit('AcessarAlunos')">
         <div class="PadrãoAmarelo CirculoOpções"><img src="..\assets\Alunos.svg" alt=""></div>
         <h2 class="PadrãoLetraTomEscuro">{{ Alunos }}</h2>
       </div>
-      <div class="BoxOpções" @click="$emit('AcessarFinanceiro')">
+      <div class="BoxOpções PadrãoBranco" @click="$emit('AcessarFinanceiro')">
         <div class="PadrãoRoxo CirculoOpções"><img src="..\assets\Cobrança.svg" alt=""></div>
         <h2 class="PadrãoLetraTomEscuro">{{ Financeiro }}</h2>
       </div>
