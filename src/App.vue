@@ -25,6 +25,7 @@
                   @AcessarMenuOpções="acessarMenuOpções()"
                   @adicionarDado="AdicionaDado($event)"
                   @ajustarDado="AjustarDado($event)"
+                  @evolução="evoluirPessoa($event)"
                   :Titulo="Titulo"
                   :ListaPessoas="Pessoas"
                   :TipoAcesso="TipoAcesso"

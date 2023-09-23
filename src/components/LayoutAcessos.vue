@@ -147,14 +147,28 @@
       <h2 class="PadrãoLetraTomMédio Fonte16">Evoluir</h2>
     </div>
 
-    <div class="botõesOpções PadrãoBranco"  @click="EditarPessoa(this.dadoCarregado), this.ExibirModalEditar()">
+    <div class="botõesOpções PadrãoBranco" v-if="this.TipoAcesso != 2"  @click="EditarPessoa(this.dadoCarregado), this.ExibirModalEditar()">
       <div class="PadrãoRosa CirculoOpções2">
         <img class="PadrãoRosa EditarNovoEtc" src="..\assets\edit.svg" alt="">
       </div>
       <h2 class="PadrãoLetraTomEscuro Fonte16">Editar</h2>
     </div>
 
-    <div class="botõesOpções PadrãoBranco" @click="ExibirModalNovo()">
+    <div class="botõesOpções PadrãoBranco" @click="ExibirModalNovo()" v-if="this.TipoAcesso != 2">
+      <div class="PadrãoRosa CirculoOpções2 ">
+        <img class="PadrãoRosa EditarNovoEtc" src="..\assets\CadastrarParceiro.svg" alt="">
+      </div>
+      <h2 class="PadrãoLetraTomMédio Fonte16">Novo</h2>
+    </div>
+
+    <div class="botõesOpções PadrãoBranco" @click="EditarTurma(), EntrarTurmaEdição()" v-if="this.TipoAcesso == 2">
+      <div class="PadrãoRosa CirculoOpções2">
+        <img class="PadrãoRosa EditarNovoEtc" src="..\assets\edit.svg" alt="">
+      </div>
+      <h2 class="PadrãoLetraTomEscuro Fonte16">Editar</h2>
+    </div>
+
+    <div class="botõesOpções PadrãoBranco" @click=" SairTurmaEdição(), NovaTurma()" v-if="this.TipoAcesso == 2">
       <div class="PadrãoRosa CirculoOpções2 ">
         <img class="PadrãoRosa EditarNovoEtc" src="..\assets\CadastrarParceiro.svg" alt="">
       </div>
@@ -301,15 +315,13 @@
           </div>
           </div>
         <div class="BotõesSalvarCancelar">
-          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="SalvarEvolução()">Salvar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="SalvarEvolução(this.EvoluçãoAdicionar[0])">Salvar</button>
           <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalEvolução()">Cancelar</button>
         </div>
       </div>
     </div>
-
-    <!--
-    <div  v-if="modalAtivoEvolução" class="BackModal">
-      <div v-for="(Evolução) in EvoluçãoAdicionar" :key="Evolução.NrSeqEvolução" class="ModalEditarNovo PadrãoBranco">
+    <div  v-if="modalAtivoTurma" class="BackModal">
+      <div v-for="(Turma) in TurmaAdicionar" :key="Turma.NrSeqTurma" class="ModalEditarNovo PadrãoBranco">
 
         <div class="TituloModal">
           <h2 class="PadrãoLetraTomEscuro Fonte34">{{ Titulo }}</h2>
@@ -318,61 +330,56 @@
 
         <div class="ModalDados">
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">Peso</p>
-            <input type="text" class="PadrãoLetraTomMédio" v-model="Evolução.Peso">
+            <p class="PadrãoLetraTomClaro">Número Turma</p>
+            <input type="text" class="PadrãoLetraTomMédio" v-model="Turma.NrSeqTurma">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">Altura</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.Altura">
+            <p class="PadrãoLetraTomClaro">Valor</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Valor">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">DCultanea</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DCultanea">
+            <p class="PadrãoLetraTomClaro">Data Cadastro</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.DataCadastro">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">DenCorporal</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DenCorporal">
+            <p class="PadrãoLetraTomClaro">Dias da Semana</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.DiaSemana[0]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.DiaSemana[1]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.DiaSemana[2]">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">FcMaxima</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.FcMaxima">
+            <p class="PadrãoLetraTomClaro">Horários</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Horário[0]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Horário[1]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Horário[2]">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">FcRepouso</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.FcRepouso">
+            <p class="PadrãoLetraTomClaro">Duração</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Duração[0]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Duração[1]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Duração[2]">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">DistAtividade</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DistAtividade">
+            <p class="PadrãoLetraTomClaro">Professor</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Professor">
           </div>
           <div class="dado">
-            <p class="PadrãoLetraTomClaro">TempAtividade</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.TempAtividade">
-          </div>
-          <div class="dado">
-            <p class="PadrãoLetraTomClaro">NvAprendizado</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.NvAprendizado">
-          </div>
-          <div class="dado">
-            <p class="PadrãoLetraTomClaro">CondFisico</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.CondFisico">
-          </div>
-          <div class="dado">
-            <p class="PadrãoLetraTomClaro">DtRegistro</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.DtRegistro">
-          </div>
-          <div class="dado">
-            <p class="PadrãoLetraTomClaro">NrSeqEvolução</p>
-            <input type="text" class="PadrãoLetraTomMédio"  v-model="Evolução.NrSeqEvolução">
+            <p class="PadrãoLetraTomClaro">Alunos</p>
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Alunos[0]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Alunos[1]">
+            <input type="text" class="PadrãoLetraTomMédio"  v-model="Turma.Alunos[2]">
           </div>
           </div>
         <div class="BotõesSalvarCancelar">
-          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="AdicionarEvolução()">Salvar</button>
-          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalEvolução()">Cancelar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="SalvarTurma(this.TurmaAdicionar)"
+          v-if="TurmaEdição==false">Salvar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalTurma()(this.TurmaAdicionar)"
+          v-if="TurmaEdição==true">Editar</button>
+          <button class="PadrãoVerdeAgua PadrãoLetraTomMédio Fonte16" @click="FecharModalTurma()">Cancelar</button>
         </div>
       </div>
     </div>
--->
+
 </template>
 
 <script src="./ScriptsLayoutAcessos.js" />

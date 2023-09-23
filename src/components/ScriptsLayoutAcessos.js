@@ -11,10 +11,16 @@ export default {
       DebugaId: false,
       DadoFiltrado: null,
       DadoPesquisa: null,
+      TurmaEdição:false,
       modalAtivo: false,
       modalAtivoEvolução: false,
+      modalAtivoTurma: false,
       dadoCarregado: null,
       EmEdição:false,
+      armazemDado: null,
+      turmas:[],
+      Evoluções: [],
+      TurmaAdicionar:[],
       EvoluçãoAdicionar:[]/* {
         Peso: null,
         Altura: null,
@@ -63,7 +69,52 @@ export default {
   },
   methods:{
     //Lógica para Turmas
-    
+    EntrarTurmaEdição(){
+      this.TurmaEdição = true
+    },SairTurmaEdição(){
+      this.TurmaEdição = false
+    },
+    ExibirModalTurma(){
+      this.modalAtivoTurma = true
+    },
+    FecharModalTurma(){
+      this.TurmaAdicionar.pop()
+      this.modalAtivoTurma = false
+    },
+    SalvarTurma(parametro){
+      let index = this.ListagemTurmas.length
+      this.ListagemTurmas[index]={...parametro[0]}
+      this.Turma = this.ListagemTurmas
+      //this.$emit('editarTurma',parametro[0])
+      this.FecharModalTurma()
+      this.TurmaAdicionar.pop()
+    },
+    NovaTurma(){
+      this.TurmaAdicionar=[{
+        NrSeqTurma: Math.round(Math.random()*100), 
+        LimiteAlunos: null,
+        Valor:null,
+        DataCadastro:'',
+        
+        DiaSemana: [],
+        Horário:[],
+        Duração:[],
+        Professor:'',
+        Alunos:[]}]
+      this.armazemDado = this.TurmaAdicionar
+      this.ExibirModalTurma()
+    },
+    EditarTurma(){
+      this.TurmaAdicionar.pop()
+      this.TurmaAdicionar.push(this.dadoCarregado)
+      this.modalAtivoTurma = true
+      this.ExibirModalTurma()
+    },
+    carregaDadoTurma(parametro){
+      let par = parametro
+      this.dadoCarregado = par
+      console.log(this.dadoCarregado)
+    },
 
     //Lógica para Evolução
     ExibirModalEvolução(){
@@ -73,10 +124,12 @@ export default {
         this.modalAtivoEvolução = true
       }
     },
-    SalvarEvolução(){
-      const par = this.EvoluçãoAdicionar[0]
-      const index = this.DBEvolução.findIndex((dado) => dado.NrSeqEvolução == par[0].NrSeqEvolução);
-      this.DBEvolução[index] = par[0];
+    SalvarEvolução(parametro){
+      console.log(parametro)
+      let par = parametro
+      const index = this.Evoluções.findIndex((dado) => dado.NrSeqEvolução === par.NrSeqEvolução);
+      this.Evoluções[index] = {...par};
+      this.$emit('evolução',par)
       this.FecharModalEvolução()
       this.EvoluçãoAdicionar.pop()
     },    
@@ -98,22 +151,19 @@ export default {
       let par = parametro
       this.DadoAdicionar = {...par};
     },
-    carregaDadoTurma(parametro){
-      let par = parametro
-      this.dadoCarregado = par
-    },
     carregaDado(parametro){
       let par = parametro
       this.dadoCarregado = par
       if(this.TipoAcesso === 3){
-        const evol = this.DBEvolução
-        const index = this.DBEvolução.findIndex((dado) => dado.NrSeqEvolução == par.NrSeqEvolução);
-        if(this.EvoluçãoAdicionar.length == 1){
-          this.EvoluçãoAdicionar.pop()
+        const evol = this.Evoluções
+        const index = this.Evoluções.findIndex((dado) => dado.NrSeqEvolução == par.NrSeqEvolução);
+        this.EvoluçãoAdicionar.pop()
+        if(this.EvoluçãoAdicionar.length == 0){
           this.EvoluçãoAdicionar.push(evol[index])          
         }else{
-          this.EvoluçãoAdicionar.push(evol[index])
+          alert('Ops... Algo deu errado, recarregue a página!')
         }
+        console.log(this.EvoluçãoAdicionar)
       }
     },
     AdicionarDado(parametro){
@@ -121,6 +171,7 @@ export default {
       par.status = 'Ativo'
       par.TipoPessoa = this.TipoAcesso
       this.ListaPessoas.push(par)
+      this.DadoFiltrado = [...this.ListaPessoas]
       this.$emit('adicionarDado', par)
       this.FecharModal()
     },
@@ -147,9 +198,20 @@ export default {
     },
     PesquisarDado(Parametro){
       if (Parametro == 'tudo'){
-        this.DadoFiltrado = this.ListaPessoas
+        if(this.TipoAcesso != 2){
+          this.DadoFiltrado = this.ListaPessoas
+        }else{
+          this.ListagemTurmas = this.Turmas
+        }
       }else{
-        this.DadoFiltrado = this.ListaPessoas.filter((dado) => dado.nome.toLowerCase().indexOf(Parametro.toLowerCase()) != -1)
+        if(this.TipoAcesso != 2){
+          this.DadoFiltrado = this.ListaPessoas.filter((dado) => dado.nome.toLowerCase().indexOf(Parametro.toLowerCase()) != -1)
+        }else{
+          let a = this.Turmas.filter((dado) => dado.NrSeqTurma == Parametro)
+          console.log(Parametro, a)
+          this.ListagemTurmas = a
+        }
+        
       }
     },
     LimparModal(){      
@@ -184,6 +246,8 @@ export default {
     }
   },
   mounted() {
-    this.DadoFiltrado = this.ListaPessoas
+    this.DadoFiltrado = [...this.ListaPessoas]
+    this.Evoluções = [...this.DBEvolução]
+    this.Turmas = [...this.ListagemTurmas]
   }
 };

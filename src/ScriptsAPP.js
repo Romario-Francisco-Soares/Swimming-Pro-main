@@ -242,6 +242,11 @@ methods:{
         alert('Login ou Senha Incorretos')
       }
     },
+    evoluirPessoa(parametro){
+      let par = parametro
+      const index = this.DBEvolução.findIndex((dado) => dado.NrSeqEvolução === par.NrSeqEvolução);
+      this.DBEvolução[index] = {...par};
+    },
     AjustarDado(parametro){
       let par = parametro
       const index = this.DBPessoas.findIndex((dado) => dado.id === par.id);
